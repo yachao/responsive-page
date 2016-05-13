@@ -11,17 +11,20 @@ window.addEventListener('resize', function() {
 
 function changeView(){
 	var width = Number(getComputedStyle(nav).width.replace(/px/, ''));
-	curView = width > 895 ? 1200 : 895;
-	if(curView === 895){
+	var video = document.getElementById('video');
+	if(width < 895 && curView != 895){
 		$('.menu-section').show();
-		$('.header-video')[0].pause();
-		$('.header-video')[0].currentTime = 0;
-	}else{
+		video.pause();
+		video.currentTime = 0;
+		curView = 895;
+	}
+	if(width > 895 && curView != 1200){
 		$('.menu-section').hide();
 		$('.menu-open').removeClass('menu-open');
-		$('.header-video')[0].play();
+		video.play();
+		curView = 1200;
 	}
-	console.log(width)
+	console.log(width, curView)
 }
 changeView();
 
